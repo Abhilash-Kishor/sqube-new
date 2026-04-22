@@ -76,7 +76,7 @@ const AcademicHorizon: React.FC = () => {
            </div>
            <div>
               <h2 className="text-5xl font-black tracking-tighter uppercase italic">{selectedChallenge}</h2>
-              <p className="text-blue-200 font-black uppercase text-[12px] tracking-[0.4em] mt-4 opacity-80">Strategic Participation & Excellence Report</p>
+              <p className="text-blue-200 font-black uppercase text-[12px] tracking-[0.4em] mt-4 opacity-80">National Participation & Excellence Report</p>
            </div>
         </div>
 

@@ -245,7 +245,7 @@ const GISMap: React.FC = () => {
       <div className="absolute top-4 left-4 z-20 pointer-events-none">
         <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xl pointer-events-auto">
           <h3 className="text-sm font-black text-[#002B5B] dark:text-blue-400 tracking-tight flex items-center gap-2 uppercase">
-            <Globe className="text-blue-600" size={14} /> National GIS Hub
+            <Globe className="text-blue-600" size={14} /> Unified Institutional View
           </h3>
         </div>
       </div>

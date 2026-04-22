@@ -56,7 +56,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'dashboard', 
     title: 'कार्यकारी सारांश', 
-    subtitle: 'Executive Summary', 
+    subtitle: 'Executive Pulse', 
     icon: <LayoutDashboard size={24} />, 
     iconType: 'pearl-blue',
     subTabs: [{ id: 'national', label: 'National Metrics' }, { id: 'regional', label: 'Regional Comparison' }]
@@ -64,7 +64,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'academic_horizon', 
     title: 'अकादमिक क्षितिज', 
-    subtitle: 'Academic Horizon', 
+    subtitle: 'Academic Insights', 
     icon: <Compass size={24} />, 
     iconType: 'pearl-purple',
     subTabs: [
@@ -76,7 +76,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'school', 
     title: 'संस्थान परिदृश्य', 
-    subtitle: 'School Panorama', 
+    subtitle: 'SARAS Panorama', 
     icon: <School size={24} />, 
     iconType: 'pearl-blue',
     subTabs: [
@@ -96,7 +96,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'infrastructure', 
     title: 'बुनियादी ढांचा', 
-    subtitle: 'Infra Panorama', 
+    subtitle: 'Infrastructure Hub', 
     icon: <Building2 size={24} />, 
     iconType: 'pearl-orange',
     subTabs: [{ id: 'physical', label: 'Physical Facilities' }, { id: 'digital', label: 'Digital Amenities' }]
@@ -104,7 +104,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'environment', 
     title: 'पर्यावरण और स्थान', 
-    subtitle: 'Environment Panorama', 
+    subtitle: 'Eco-System Audit', 
     icon: <Trees size={24} />, 
     iconType: 'pearl-green',
     subTabs: [{ id: 'sustainability', label: 'Sustainability Hub' }, { id: 'proximity', label: 'Proximity Analysis' }]
@@ -112,7 +112,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'sports', 
     title: 'खेल विश्लेषण', 
-    subtitle: 'Sports Analytics', 
+    subtitle: 'Sports Excellence', 
     icon: <SportsIcon size={24} />, 
     iconType: 'pearl-orange',
     subTabs: [{ id: 'summary', label: 'Sports Summary' }, { id: 'games', label: 'Games Opted' }, { id: 'performance', label: 'Performance' }]
@@ -120,7 +120,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'result', 
     title: 'परिणाम', 
-    subtitle: 'Result Landscape', 
+    subtitle: 'Performance Matrix', 
     icon: <BarChart3 size={24} />, 
     iconType: 'pearl-indigo',
     subTabs: [{ id: 'class10', label: 'Class X' }, { id: 'class12', label: 'Class XII' }, { id: 'grades', label: 'Grade Analytics' }]
@@ -128,7 +128,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'affiliation', 
     title: 'संबद्धन', 
-    subtitle: 'Affiliation Hub', 
+    subtitle: 'Affiliation Portal', 
     icon: <FileCheck size={24} />, 
     iconType: 'pearl-cyan',
     subTabs: [{ id: 'status', label: 'Status' }, { id: 'sqaaf', label: 'SQAAF' }]
@@ -136,7 +136,7 @@ export const MODULE_DEFINITIONS: ModuleDefinition[] = [
   { 
     id: 'exam', 
     title: 'परीक्षा विश्लेषण', 
-    subtitle: 'Exam Panorama', 
+    subtitle: 'Assessment Hub', 
     icon: <Zap size={24} />, 
     iconType: 'pearl-red',
     subTabs: [

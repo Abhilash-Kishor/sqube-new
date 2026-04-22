@@ -54,16 +54,16 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp, user, onLogout, language,
       <main className="relative z-10 max-w-7xl mx-auto px-12 pt-20 pb-40">
         <div className="text-center mb-24 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-10 duration-1000">
           <div className="inline-flex items-center gap-3 px-6 py-2 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-10 text-blue-600 dark:text-blue-400">
-            <Sparkles size={14} /> National Strategy Hub
+            <Sparkles size={14} /> National Analytics Hub
           </div>
           <h2 className="text-7xl font-black mb-10 leading-[1] tracking-tighter">
             Distilling Complexity <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 animate-gradient-x">
-              Into Actionable Governance
+              Into Actionable Insights
             </span>
           </h2>
           <p className="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            Welcome to the sovereign institutional intelligence engine. Navigate multi-layered datasets designed for rapid policy formulation and resource auditing.
+            Welcome to the unified institutional intelligence engine. Navigate multi-layered datasets designed for rapid policy formulation and resource auditing.
           </p>
         </div>
 
@@ -102,13 +102,13 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp, user, onLogout, language,
             onClick={() => onEnterApp('dashboard')}
             className="group px-16 py-8 bg-slate-900 dark:bg-blue-600 text-white rounded-[2.5rem] font-black text-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-6 mx-auto"
           >
-            Launch Command Center <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
+            Launch Unified Hub <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
           </button>
         </div>
       </main>
 
       <footer className="p-20 text-center opacity-40">
-        <p className="text-[11px] font-black uppercase tracking-[0.5em]">© 2026 CBSE Strategic IT Hub • Sovereign Infrastructure</p>
+        <p className="text-[11px] font-black uppercase tracking-[0.5em]">© 2026 CBSE National IT Hub • Unified Infrastructure</p>
       </footer>
     </div>
   );

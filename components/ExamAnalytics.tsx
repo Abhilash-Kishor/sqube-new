@@ -126,7 +126,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
                <div className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-xl"><Charts.ExecutiveDonutChart data={currentData.exam_performance?.summary || []} /></div>
                <div className="bg-[#002B5B] dark:bg-slate-800 p-10 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 right-0 p-8 opacity-10"><Zap size={160} /></div>
-                  <h4 className="text-[10px] font-black text-blue-200 uppercase tracking-[0.4em] mb-6">Strategic Insight</h4>
+                  <h4 className="text-[10px] font-black text-blue-200 uppercase tracking-[0.4em] mb-6">National Insight</h4>
                   <p className="text-2xl font-black leading-tight tracking-tight">National success variance is stabilized at ±{successVariance}% across core clusters.</p>
                   <p className="text-[10px] text-blue-300 mt-8 uppercase tracking-[0.3em] font-black border-l-2 border-blue-500 pl-4">Verified Feed: {new Date().toLocaleDateString()}</p>
                </div>

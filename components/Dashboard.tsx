@@ -73,7 +73,7 @@ const Dashboard: React.FC<DashboardProps> = ({
 
   return (
     <div className="space-y-10 font-inter pb-24">
-      {/* Strategic Command Priorities Bar */}
+      {/* Command Priorities Bar */}
       <div className="bg-slate-900 text-white px-8 py-4 rounded-[2rem] flex flex-wrap items-center justify-between gap-6 shadow-2xl border border-white/10 relative overflow-hidden group">
          <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none rotate-12"><Zap size={100} /></div>
          <div className="flex items-center gap-4">

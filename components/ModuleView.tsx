@@ -82,7 +82,7 @@ const ModuleView: React.FC<ModuleViewProps> = ({
           </div>
           <div>
             <h4 className="text-[11px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              {syncError ? 'Optimizer Active' : 'Strategic Intelligence Brief'}
+              {syncError ? 'Optimizer Active' : 'National Intelligence Brief'}
             </h4>
             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
               {isBriefingLoading ? 'Refining National Insights...' : 'OASIS Registry Analysis'}

@@ -58,7 +58,7 @@ export const getAIInsight = async (
         },
       });
 
-      const result = response.text?.trim() || "Strategic summary pending registry stabilization.";
+      const result = response.text?.trim() || "National summary pending registry stabilization.";
       insightCache.set(cacheKey, { text: result, expiry: Date.now() + CACHE_DURATION });
       return result;
     } catch (error: any) {
@@ -71,7 +71,7 @@ export const getAIInsight = async (
         return getAIInsight(moduleName, dataSummary, targetLanguage, retryCount + 1);
       }
 
-      return cached?.text || "Strategic engine optimizing. Metrics remain live in the registry below.";
+      return cached?.text || "Analytical engine optimizing. Metrics remain live in the registry below.";
     } finally {
       pendingRequests.delete(cacheKey);
     }
@@ -82,7 +82,7 @@ export const getAIInsight = async (
   return requestPromise;
 };
 
-export const startStrategicChat = async (contextData: any) => {
+export const startNationalChat = async (contextData: any) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     // Aggressive context trimming for chat to avoid 500 errors

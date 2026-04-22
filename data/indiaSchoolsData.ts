@@ -41,5 +41,12 @@ export const INDIA_SCHOOLS_DATA: IndiaSchoolData[] = [
   { state: 'Ladakh', schools: 15, students: 15000, teachers: 600 },
   { state: 'Andaman AND Nicobar Islands', schools: 25, students: 25000, teachers: 1000 },
   { state: 'Lakshadweep', schools: 5, students: 5000, teachers: 200 },
-  { state: 'Dadra AND Nagar Haveli and Daman AND Diu', schools: 20, students: 20000, teachers: 800 }
+  { state: 'Dadra AND Nagar Haveli and Daman AND Diu', schools: 20, students: 20000, teachers: 800 },
+  { state: 'International (Overseas Schools)', schools: 240, students: 240000, teachers: 9600 },
+  { state: 'United Arab Emirates', schools: 80, students: 64000, teachers: 3200 },
+  { state: 'Saudi Arabia', schools: 45, students: 36000, teachers: 1800 },
+  { state: 'Singapore', schools: 15, students: 12000, teachers: 600 },
+  { state: 'Nepal', schools: 12, students: 9600, teachers: 480 },
+  { state: 'Oman', schools: 20, students: 16000, teachers: 800 },
+  { state: 'Kuwait', schools: 22, students: 17600, teachers: 880 }
 ];

@@ -83,7 +83,7 @@ export const ExecutiveRadarChart: React.FC<{ data: DataPoint[] }> = ({ data = []
       type: 'radar',
       data: [{
         value: safeData.map(d => d.v || 0),
-        name: 'Strategic Metric',
+        name: 'National Metric',
         itemStyle: { color: COLORS[0] },
         areaStyle: { color: 'rgba(79, 70, 229, 0.4)' },
         symbolSize: 6

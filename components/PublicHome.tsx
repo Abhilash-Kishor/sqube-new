@@ -28,7 +28,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
     { name: 'Features', id: 'features' }
   ];
 
-  const strategicStats = [
+  const nationalStats = [
     { label: 'Registered Institutions', value: '30,124', sub: 'National Affiliation Fabric', icon: <Database className="text-white transition-colors" /> },
     { label: 'Quality Framework', value: 'SQAAF', sub: 'Institutional Maturity Index', icon: <Award className="text-white transition-colors" /> },
     { label: 'Learning Outcomes', value: 'SAFAL', sub: 'Growth Tracking Synchronized', icon: <Target className="text-white transition-colors" /> },
@@ -106,7 +106,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
             />
             <div className="border-l border-slate-200 pl-4 hidden sm:block">
               <h1 className="text-xl font-black text-[#002B5B] tracking-tighter leading-none">सागर से साराांश</h1>
-              <p className="text-[9px] font-black text-[#0066CC] uppercase tracking-[0.2em] mt-1.5">CBSE Strategic IT Hub</p>
+              <p className="text-[9px] font-black text-[#0066CC] uppercase tracking-[0.2em] mt-1.5">CBSE National IT Hub</p>
             </div>
           </div>
           
@@ -142,13 +142,13 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
           <div className="space-y-10">
             <div className="inline-flex items-center gap-3 px-5 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-100 shadow-sm animate-fade-in">
               <Sparkles size={16} className="text-[#0066CC]" />
-              <span className="text-[10px] font-black text-[#0066CC] uppercase tracking-[0.25em]">S³ Strategic Decision Engine</span>
+              <span className="text-[10px] font-black text-[#0066CC] uppercase tracking-[0.25em]">S³ Analytical Decision Engine</span>
             </div>
             
             <div className="space-y-4">
               <h2 className="text-5xl lg:text-[4.5rem] font-black text-[#002B5B] tracking-tighter leading-[0.9] drop-shadow-sm">
                 National <br/>
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] via-[#0066CC] to-[#1E40AF]">Strategic Intelligence.</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#002B5B] via-[#0066CC] to-[#1E40AF]">National Analytics.</span>
               </h2>
               <div className="h-2 w-32 bg-gradient-to-r from-[#FF9933] to-[#FFCC66] rounded-full"></div>
             </div>
@@ -177,7 +177,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
                   <Activity size={24} className="text-blue-200 animate-pulse" />
                </div>
                <div className="space-y-12">
-                  {strategicStats.map((stat, i) => (
+                  {nationalStats.map((stat, i) => (
                     <div key={i} className="flex items-center gap-8 group cursor-pointer">
                        <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center border border-white/20 group-hover:bg-white group-hover:text-[#002B5B] transition-all duration-500 shadow-sm group-hover:shadow-2xl group-hover:-translate-y-1">
                           {React.cloneElement(stat.icon as React.ReactElement<any>, { size: 36, className: "group-hover:text-[#002B5B] transition-colors" })}
@@ -195,11 +195,11 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
         </div>
       </header>
 
-      {/* Strategic Pillars Section */}
+      {/* National Pillars Section */}
       <section id="pillars" className="py-24 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 space-y-4">
-             <h3 className="text-4xl font-black text-[#002B5B] tracking-tight">Strategic Intelligence Pillars</h3>
+             <h3 className="text-4xl font-black text-[#002B5B] tracking-tight">National Intelligence Pillars</h3>
              <p className="text-slate-500 font-bold uppercase text-[11px] tracking-[0.3em]">Advanced Diagnostic Capabilities</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -323,7 +323,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
               />
               <div>
                 <span className="font-black text-[#002B5B] block text-xl leading-none uppercase tracking-tight">सागर से साराांश</span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0066CC] mt-1.5">CBSE Strategic IT Unit</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0066CC] mt-1.5">CBSE National IT Unit</span>
               </div>
             </div>
             <p className="text-[11px] font-medium leading-relaxed max-w-sm">

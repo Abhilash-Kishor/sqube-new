@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, Send, X, Minimize2, Sparkles, FileText, Download, User, BrainCircuit } from 'lucide-react';
-import { startStrategicChat } from '../services/geminiService';
+import { startNationalChat } from '../services/geminiService';
 import { dashboardData } from '../mockData';
 
 interface Message {
@@ -14,7 +14,7 @@ const AIAnalystChat: React.FC = () => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'Greetings, Executive. I am the S³ Strategic AI Advisor. I have synchronized the latest OASIS National Repository data. How may I assist your policy formulation today?' }
+    { role: 'model', text: 'Greetings, Executive. I am the S³ National AI Advisor. I have synchronized the latest OASIS National Repository data. How may I assist your policy formulation today?' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const chatInstanceRef = useRef<any>(null);
@@ -28,7 +28,7 @@ const AIAnalystChat: React.FC = () => {
 
   const initChat = async () => {
     if (!chatInstanceRef.current) {
-      chatInstanceRef.current = await startStrategicChat(dashboardData);
+      chatInstanceRef.current = await startNationalChat(dashboardData);
     }
   };
 
@@ -45,7 +45,7 @@ const AIAnalystChat: React.FC = () => {
       const response = await chatInstanceRef.current.sendMessage({ message: userMessage });
       setMessages(prev => [...prev, { role: 'model', text: response.text || 'Synthesis failed. Please rephrase.' }]);
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: 'Strategic link severed. Check connectivity.' }]);
+      setMessages(prev => [...prev, { role: 'model', text: 'Connection link severed. Check connectivity.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -82,7 +82,7 @@ const AIAnalystChat: React.FC = () => {
               <Bot size={20} className="text-blue-200" />
            </div>
            <div className="min-w-0">
-              <h4 className="text-[11px] font-black uppercase tracking-widest leading-none truncate">AI Strategic Analyst</h4>
+              <h4 className="text-[11px] font-black uppercase tracking-widest leading-none truncate">AI National Analyst</h4>
               <p className="text-[9px] font-bold text-blue-300 mt-1 opacity-70 truncate">S³ Intelligence Online</p>
            </div>
         </div>
@@ -143,7 +143,7 @@ const AIAnalystChat: React.FC = () => {
                   <Send size={18} />
                 </button>
              </div>
-             <p className="text-[8px] text-center text-slate-400 font-bold uppercase tracking-[0.3em]">S³ Intelligence • Sovereign Data Infrastructure</p>
+             <p className="text-[8px] text-center text-slate-400 font-bold uppercase tracking-[0.3em]">S³ National Hub • Sovereign Data Infrastructure</p>
           </div>
         </>
       )}
