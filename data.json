@@ -1,0 +1,70 @@
+
+{
+  "regions": {
+    "All India": {
+      "management": [
+        { "name": "Govt/State", "value": 12050 },
+        { "name": "Independent", "value": 15062 },
+        { "name": "KVS/NVS", "value": 3012 }
+      ],
+      "safal": [
+        { "year": "2021", "secondary": 78, "primary": 82 },
+        { "year": "2022", "secondary": 81, "primary": 84 },
+        { "year": "2023", "secondary": 79, "primary": 86 },
+        { "year": "2024", "secondary": 85, "primary": 89 }
+      ]
+    },
+    "Delhi West": {
+      "management": [
+        { "name": "Govt/State", "value": 850 },
+        { "name": "Independent", "value": 1200 },
+        { "name": "KVS/NVS", "value": 400 }
+      ],
+      "safal": [
+        { "year": "2021", "secondary": 82, "primary": 85 },
+        { "year": "2022", "secondary": 84, "primary": 88 },
+        { "year": "2023", "secondary": 83, "primary": 87 },
+        { "year": "2024", "secondary": 89, "primary": 92 }
+      ]
+    },
+    "Chennai": {
+      "management": [
+        { "name": "Govt/State", "value": 600 },
+        { "name": "Independent", "value": 1400 },
+        { "name": "KVS/NVS", "value": 100 }
+      ],
+      "safal": [
+        { "year": "2021", "secondary": 85, "primary": 88 },
+        { "year": "2022", "secondary": 88, "primary": 91 },
+        { "year": "2023", "secondary": 87, "primary": 90 },
+        { "year": "2024", "secondary": 92, "primary": 95 }
+      ]
+    },
+    "Bhopal": {
+      "management": [
+        { "name": "Govt/State", "value": 1100 },
+        { "name": "Independent", "value": 800 },
+        { "name": "KVS/NVS", "value": 700 }
+      ],
+      "safal": [
+        { "year": "2021", "secondary": 72, "primary": 76 },
+        { "year": "2022", "secondary": 75, "primary": 80 },
+        { "year": "2023", "secondary": 74, "primary": 79 },
+        { "year": "2024", "secondary": 80, "primary": 84 }
+      ]
+    }
+  },
+  "default": {
+    "management": [
+      { "name": "Govt/State", "value": 1000 },
+      { "name": "Independent", "value": 1000 },
+      { "name": "KVS/NVS", "value": 500 }
+    ],
+    "safal": [
+      { "year": "2021", "secondary": 75, "primary": 80 },
+      { "year": "2022", "secondary": 78, "primary": 82 },
+      { "year": "2023", "secondary": 77, "primary": 81 },
+      { "year": "2024", "secondary": 82, "primary": 86 }
+    ]
+  }
+}

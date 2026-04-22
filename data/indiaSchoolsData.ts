@@ -1,0 +1,45 @@
+export interface IndiaSchoolData {
+  state: string;
+  schools: number;
+  students: number;
+  teachers: number;
+}
+
+export const INDIA_SCHOOLS_DATA: IndiaSchoolData[] = [
+  { state: 'Uttar Pradesh', schools: 9238, students: 9238000, teachers: 369520 },
+  { state: 'Maharashtra', schools: 5812, students: 5812000, teachers: 232480 },
+  { state: 'Karnataka', schools: 5327, students: 5327000, teachers: 213080 },
+  { state: 'Delhi', schools: 4912, students: 4912000, teachers: 196480 },
+  { state: 'Tamil Nadu', schools: 4075, students: 4075000, teachers: 163000 },
+  { state: 'West Bengal', schools: 3684, students: 3684000, teachers: 147360 },
+  { state: 'Gujarat', schools: 3412, students: 3412000, teachers: 136480 },
+  { state: 'Rajasthan', schools: 3189, students: 3189000, teachers: 127560 },
+  { state: 'Haryana', schools: 2207, students: 2207000, teachers: 88280 },
+  { state: 'Madhya Pradesh', schools: 1564, students: 1564000, teachers: 62560 },
+  { state: 'Punjab', schools: 1537, students: 1537000, teachers: 61480 },
+  { state: 'Kerala', schools: 1461, students: 1461000, teachers: 58440 },
+  { state: 'Bihar', schools: 1200, students: 1200000, teachers: 48000 },
+  { state: 'Andhra Pradesh', schools: 800, students: 800000, teachers: 32000 },
+  { state: 'Chhattisgarh', schools: 783, students: 783000, teachers: 31320 },
+  { state: 'Odisha', schools: 705, students: 705000, teachers: 28200 },
+  { state: 'Uttarakhand', schools: 881, students: 881000, teachers: 35240 },
+  { state: 'Jharkhand', schools: 558, students: 558000, teachers: 22320 },
+  { state: 'Telangana', schools: 479, students: 479000, teachers: 19160 },
+  { state: 'Assam', schools: 329, students: 329000, teachers: 13160 },
+  { state: 'Himachal Pradesh', schools: 330, students: 330000, teachers: 13200 },
+  { state: 'Jammu & Kashmir', schools: 250, students: 250000, teachers: 10000 },
+  { state: 'Chandigarh', schools: 171, students: 171000, teachers: 6840 },
+  { state: 'Goa', schools: 45, students: 45000, teachers: 1800 },
+  { state: 'Tripura', schools: 50, students: 50000, teachers: 2000 },
+  { state: 'Manipur', schools: 60, students: 60000, teachers: 2400 },
+  { state: 'Meghalaya', schools: 40, students: 40000, teachers: 1600 },
+  { state: 'Nagaland', schools: 35, students: 35000, teachers: 1400 },
+  { state: 'Sikkim', schools: 25, students: 25000, teachers: 1000 },
+  { state: 'Arunachal Pradesh', schools: 30, students: 30000, teachers: 1200 },
+  { state: 'Mizoram', schools: 20, students: 20000, teachers: 800 },
+  { state: 'Puducherry', schools: 90, students: 90000, teachers: 3600 },
+  { state: 'Ladakh', schools: 15, students: 15000, teachers: 600 },
+  { state: 'Andaman AND Nicobar Islands', schools: 25, students: 25000, teachers: 1000 },
+  { state: 'Lakshadweep', schools: 5, students: 5000, teachers: 200 },
+  { state: 'Dadra AND Nagar Haveli and Daman AND Diu', schools: 20, students: 20000, teachers: 800 }
+];

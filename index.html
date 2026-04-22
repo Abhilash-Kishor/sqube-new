@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagar se Saransh 3.0 | Strategic Intelligence Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              animation: {
+                'gradient-x': 'gradient-x 15s ease infinite',
+              },
+              keyframes: {
+                'gradient-x': {
+                  '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                  '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                },
+              },
+            },
+          },
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Unified ArcGIS and Calcite Styles -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css">
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "@arcgis/core/": "https://js.arcgis.com/4.31/@arcgis/core/"
+      }
+    }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease, color 0.5s ease; margin: 0; padding: 0; }
+        h1, h2, h3, h4, h5 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .cbse-gradient {
+          background: linear-gradient(135deg, #002B5B 0%, #0066CC 100%);
+        }
+
+        /* Essential for ArcGIS Map Rendering */
+        #root { height: 100vh; display: flex; flex-direction: column; }
+        .esri-view { height: 100% !important; width: 100% !important; margin: 0; padding: 0; }
+        .esri-view-surface:focus::after { outline: none !important; }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased dark:bg-slate-950">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

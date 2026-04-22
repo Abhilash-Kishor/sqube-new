@@ -1,0 +1,9 @@
+{
+  "name": "Sagar se Saransh SQUBE",
+  "description": "A revamped executive-grade decision support and analytics portal for CBSE, featuring AI-powered KPI explanations and modernized data storytelling.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
