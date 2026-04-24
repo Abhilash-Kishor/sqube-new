@@ -1,30 +1,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { MODULE_DEFINITIONS, CBSE_REGIONS } from '../constants';
-import { LogOut, ChevronDown, Languages, MapPin, Moon, Sun } from 'lucide-react';
+import { LogOut, Languages, MapPin, Moon, Sun } from 'lucide-react';
 import AIAnalystChat from './AIAnalystChat';
-import { Language, Theme } from '../types';
 
-interface LayoutProps {
-  children: React.ReactNode;
-  activeTab: string;
-  setActiveTab: (id: string) => void;
-  activeSubTab: string;
-  setActiveSubTab: (id: string) => void;
-  user: any;
-  onLogout: () => void;
-  onBackToPortal: () => void;
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  selectedRegion: string;
-  setSelectedRegion: (val: string) => void;
-  selectedSchoolType: string;
-  setSelectedSchoolType: (val: string) => void;
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-const LANGUAGES: {id: Language, label: string}[] = [
+const LANGUAGES = [
   { id: 'en', label: 'English' },
   { id: 'hi', label: 'हिन्दी' },
   { id: 'mr', label: 'मराठी' },
@@ -33,16 +13,16 @@ const LANGUAGES: {id: Language, label: string}[] = [
   { id: 'bn', label: 'বাংলা' }
 ];
 
-const Layout: React.FC<LayoutProps> = ({ 
+const Layout = ({ 
   children, activeTab, setActiveTab, activeSubTab, setActiveSubTab, user, onLogout, 
   onBackToPortal, language, setLanguage, selectedRegion, setSelectedRegion, theme, toggleTheme 
 }) => {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setLangMenuOpen(false);
       }
     };
@@ -50,7 +30,6 @@ const Layout: React.FC<LayoutProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Safety: Fallback if activeTab is invalidated during a sync
   const currentModule = MODULE_DEFINITIONS.find(m => m.id === activeTab) || MODULE_DEFINITIONS[0];
   const subTabs = currentModule?.subTabs || [];
 
@@ -114,7 +93,7 @@ const Layout: React.FC<LayoutProps> = ({
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-20 z-[90] px-4 lg:px-8 h-14 flex items-center gap-4 shadow-sm">
         <div className="flex items-center gap-2 shrink-0 pr-4 border-r border-slate-100 dark:border-slate-800">
            <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-white ${activeTab === 'dashboard' ? 'bg-blue-600' : 'bg-slate-700'}`}>
-              {React.isValidElement(currentModule.icon) ? React.cloneElement(currentModule.icon as React.ReactElement<any>, { size: 16 }) : null}
+              {React.isValidElement(currentModule.icon) ? React.cloneElement(currentModule.icon, { size: 16 }) : null}
            </div>
            <p className="hidden sm:block text-[10px] font-black uppercase tracking-tighter text-slate-700 dark:text-slate-300">{currentModule.subtitle}</p>
         </div>

@@ -6,20 +6,16 @@ import Landing from './components/Landing';
 import PublicHome from './components/PublicHome';
 import ModuleView from './components/ModuleView';
 import { MODULE_DEFINITIONS } from './constants';
-import { Language, Theme } from './types';
 
-export type AppView = 'public' | 'login' | 'portal' | 'dashboard' | 'school';
-export type InstitutionType = 'cbse' | 'nvs' | 'kvs';
-
-const App: React.FC = () => {
+const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [view, setView] = useState<AppView>('public');
+  const [view, setView] = useState('public');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [activeSubTab, setActiveSubTab] = useState('national');
-  const [user, setUser] = useState<any>(null);
-  const [selectedInstitution, setSelectedInstitution] = useState<InstitutionType>('cbse');
-  const [language, setLanguage] = useState<Language>('en');
-  const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem('s3-theme') as Theme) || 'light');
+  const [user, setUser] = useState(null);
+  const [selectedInstitution, setSelectedInstitution] = useState('cbse');
+  const [language, setLanguage] = useState('en');
+  const [theme, setTheme] = useState(() => localStorage.getItem('s3-theme') || 'light');
   
   // Global Filters
   const [selectedRegion, setSelectedRegion] = useState('Delhi West');
@@ -30,7 +26,7 @@ const App: React.FC = () => {
     localStorage.setItem('s3-theme', theme);
   }, [theme]);
 
-  const handleLogin = (username: string) => {
+  const handleLogin = (username) => {
     setUser({ username, role: 'Leadership' });
     setIsAuthenticated(true);
     setView('portal');
@@ -44,7 +40,7 @@ const App: React.FC = () => {
     setActiveSubTab('national');
   };
 
-  const handleEnterApp = (tabId: string) => {
+  const handleEnterApp = (tabId) => {
     const module = MODULE_DEFINITIONS.find(m => m.id === tabId);
     setActiveTab(tabId);
     setActiveSubTab(module?.subTabs[0]?.id || 'summary');
@@ -53,7 +49,7 @@ const App: React.FC = () => {
 
   const handleBackToPortal = () => setView('portal');
 
-  const handleShowLogin = (institution: InstitutionType) => {
+  const handleShowLogin = (institution) => {
     setSelectedInstitution(institution);
     setView('login');
   };
@@ -71,7 +67,6 @@ const App: React.FC = () => {
          >
            ← Back to Home
          </button>
-         {/* Fix: Language prop now matches the expanded Language type */}
          <Auth onLogin={handleLogin} institution={selectedInstitution} language={language} />
       </div>
     );

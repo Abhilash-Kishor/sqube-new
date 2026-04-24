@@ -7,7 +7,6 @@ import {
   Library, 
   Activity,
   FileText,
-  ChevronRight,
   Target,
   LayoutGrid
 } from 'lucide-react';
@@ -15,18 +14,12 @@ import * as Charts from './ExecutiveCharts';
 import { dashboardData } from '../mockData';
 import { MODULE_DEFINITIONS } from '../constants';
 
-interface InfrastructureAnalyticsProps {
-  activeSubTab: string;
-  setActiveSubTab: (id: string) => void;
-  region?: string;
-}
-
-const InfrastructureAnalytics: React.FC<InfrastructureAnalyticsProps> = ({ 
+const InfrastructureAnalytics = ({ 
   activeSubTab, 
   setActiveSubTab,
   region = 'All India' 
 }) => {
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+  const [viewMode, setViewMode] = useState('chart');
   const [isSyncing, setIsSyncing] = useState(true);
 
   const currentModule = MODULE_DEFINITIONS.find(m => m.id === 'infrastructure');
@@ -44,11 +37,11 @@ const InfrastructureAnalytics: React.FC<InfrastructureAnalyticsProps> = ({
 
   const currentData = useMemo(() => {
     if (!dashboardData || !dashboardData.regions) return dashboardData?.default || {};
-    const data = (dashboardData.regions as any)[region] || dashboardData.default;
+    const data = dashboardData.regions[region] || dashboardData.default;
     return data;
   }, [region]);
 
-  const renderAuditControls = (label: string) => (
+  const renderAuditControls = (label) => (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 dark:border-slate-800 pb-6 gap-4 mb-8">
        <div className="space-y-1">
           <p className="text-[10px] font-black text-orange-500 uppercase tracking-widest">National Infrastructure Audit</p>
@@ -117,7 +110,7 @@ const InfrastructureAnalytics: React.FC<InfrastructureAnalyticsProps> = ({
                    </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-                   {data?.map((row: any, i: number) => (
+                   {data?.map((row, i) => (
                      <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
                         <td className="px-10 py-5 font-black text-[#002B5B] dark:text-slate-300 uppercase text-xs">{row.n}</td>
                         <td className="px-10 py-5 font-black text-3xl text-orange-600 text-center">{row.v}%</td>

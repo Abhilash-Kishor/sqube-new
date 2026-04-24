@@ -1,4 +1,5 @@
-export const STATE_SCHOOL_METRICS: Record<string, { schools: number; students: number; teachers: number }> = {
+
+export const STATE_SCHOOL_METRICS = {
   "Madhya Pradesh": { schools: 5220, students: 252220, teachers: 15712 },
   "Maharashtra": { schools: 8450, students: 485200, teachers: 22150 },
   "Uttar Pradesh": { schools: 12400, students: 685000, teachers: 35600 },
@@ -37,7 +38,7 @@ const CBSE_REGIONS_LIST = [
   'Prayagraj', 'Pune', 'Thiruvananthapuram', 'Vijayawada'
 ];
 
-const generateHighVolumeData = (baseVal: number, variance: number, count: number = 155) => {
+const generateHighVolumeData = (baseVal, variance, count = 155) => {
   const data = [];
   for (let i = 0; i < count; i++) {
     const state = INDIAN_STATES[i % INDIAN_STATES.length];
@@ -88,7 +89,7 @@ const MOCK_DIGITAL_INFRA = [
   { "n": "Computer Aided Lab", "v": 72.2 }
 ];
 
-export const academicChallengeData: any = {
+export const academicChallengeData = {
   "Ganit Challenge": {
     participation: generateStateWiseChallengeData(),
     winners: [
@@ -129,7 +130,7 @@ export const academicChallengeData: any = {
   }
 };
 
-export const dashboardData: any = {
+export const dashboardData = {
   "regions": {
     "All India": {
       "management": [{ "n": "Govt/State", "v": 12050 }, { "n": "Independent", "v": 15062 }, { "n": "KVS/NVS", "v": 3012 }],

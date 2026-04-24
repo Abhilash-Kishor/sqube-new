@@ -1,25 +1,20 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { INDIA_SCHOOLS_DATA } from '../data/indiaSchoolsData';
 import { MapIcon, AlertCircle, Info, Activity } from 'lucide-react';
 
-declare global {
-  interface Window {
-    echarts: any;
-  }
-}
-
-const SpatialEcosystemMap: React.FC = () => {
-  const mapRef = useRef<HTMLDivElement>(null);
+const SpatialEcosystemMap = () => {
+  const mapRef = useRef(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [view, setView] = useState<'india' | 'international'>('india');
+  const [error, setError] = useState(null);
+  const [view, setView] = useState('india');
   const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
-    let myChart: any = null;
+    let myChart = null;
     let isMounted = true;
 
-    const fetchWithTimeout = async (url: string, options: any = {}, timeout = 15000) => {
+    const fetchWithTimeout = async (url, options = {}, timeout = 8000) => {
       const controller = new AbortController();
       const id = setTimeout(() => controller.abort(), timeout);
       try {
@@ -38,12 +33,14 @@ const SpatialEcosystemMap: React.FC = () => {
       setError(null);
 
       try {
-        // Sequential fallback strategy
+        // Optimized fallback strategy - Highcharts mirror first for speed and reliability
         const INDIA_URLS = [
           "https://code.highcharts.com/mapdata/countries/in/in-all.geo.json",
+          "https://raw.githubusercontent.com/AnjayGoel/India-Maps-GeoJSON/master/india_state.json",
           "https://raw.githubusercontent.com/Subhash0708/India-GeoJSON/main/India_States.json",
-          "https://raw.githubusercontent.com/udit-001/india-maps-data/master/india.json",
-          "https://raw.githubusercontent.com/AnjayGoel/India-Maps-GeoJSON/master/india_state.json"
+          "https://raw.githubusercontent.com/datameet/maps/master/States/Admin2.json",
+          "https://raw.githubusercontent.com/udit-001/india-maps-data/master/india_state.json",
+          "https://raw.githubusercontent.com/udit-001/india-maps-data/main/india_state.json"
         ];
 
         const WORLD_URLS = [
@@ -51,7 +48,7 @@ const SpatialEcosystemMap: React.FC = () => {
           "https://code.highcharts.com/mapdata/custom/world.geo.json"
         ];
 
-        let geoJson: any = null;
+        let geoJson = null;
         const urlsToTry = view === 'india' ? INDIA_URLS : WORLD_URLS;
 
         for (const url of urlsToTry) {
@@ -74,14 +71,17 @@ const SpatialEcosystemMap: React.FC = () => {
 
         myChart = window.echarts.init(mapRef.current);
 
-        const normalize = (s: string) => (s || '').toLowerCase()
+        const normalize = (s) => (s || '').toLowerCase()
           .replace(/&/g, 'and')
           .replace(/ and /g, ' ')
           .replace(/[^a-z0-9]/g, '')
           .replace('jammuandkashmir', 'jammukashmir')
+          .replace('kashmir', 'jammukashmir')
           .replace('andamanandnicobar', 'andamannicobar')
           .replace('dadraandnagarhavelianddamananddiu', 'dadranagarhavelidamananddiu')
           .replace('arunachalpradesh', 'arunachal')
+          .replace('ladakhut', 'ladakh')
+          .replace('unionterritoryofladakh', 'ladakh')
           .replace('lakshadweepislands', 'lakshadweep')
           .trim();
 
@@ -93,7 +93,7 @@ const SpatialEcosystemMap: React.FC = () => {
           normalized: normalize(d.state)
         }));
 
-        const finalMapData = geoJson.features.map((feature: any) => {
+        const finalMapData = geoJson.features.map((feature) => {
           const props = feature.properties || {};
           // Comprehensive property check for different GeoJSON structures
           const featureName = props.ST_NM || props.ST_NAME || props.NAME_1 || props.state_name || props.name || props['name-en'] || props.NAME || "";
@@ -121,7 +121,7 @@ const SpatialEcosystemMap: React.FC = () => {
             padding: [16, 20],
             borderRadius: 16,
             z: 9999,
-            formatter: (params: any) => {
+            formatter: (params) => {
               if (!params.data || params.data.value === 0) {
                 const nameStr = params.name || 'Unknown Region';
                 return `<div class="text-[10px] font-black uppercase text-slate-900">${nameStr}</div><div class="text-[9px] text-slate-800 font-bold opacity-70">No Registry Data</div>`;
@@ -161,10 +161,10 @@ const SpatialEcosystemMap: React.FC = () => {
               type: 'map',
               map: view,
               roam: true,
-              layoutCenter: ['50%', '50%'],
-              layoutSize: '88%', // Added padding via layoutSize
-              aspectScale: 0.85,
-              zoom: 1.0, // Reset zoom to 1.0 to rely on layoutSize for scaling
+              layoutCenter: ['50%', '48%'],
+              layoutSize: '95%', 
+              aspectScale: 0.9,
+              zoom: 1.0, 
               emphasis: {
                 label: { show: false },
                 itemStyle: { areaColor: '#F59E0B' }
@@ -182,7 +182,7 @@ const SpatialEcosystemMap: React.FC = () => {
         myChart.setOption(option);
         setMapLoaded(true);
 
-      } catch (err: any) {
+      } catch (err) {
         if (isMounted) setError(`GIS Registry unreachable: ${err?.message || "Connection Timed Out"}`);
       }
     };
@@ -217,7 +217,7 @@ const SpatialEcosystemMap: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Header HUD - Moved above map to prevent coincidence */}
+      {/* Header HUD */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-white/90 backdrop-blur-xl p-6 rounded-[2.5rem] border border-slate-200 shadow-xl transition-all hover:shadow-2xl">
          <div className="flex items-center gap-5">
             <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transform transition-transform hover:rotate-3">
@@ -247,7 +247,7 @@ const SpatialEcosystemMap: React.FC = () => {
       </div>
 
       <div className="relative w-full h-[850px] bg-slate-50/50 rounded-[4rem] overflow-hidden border border-slate-200/80 shadow-2xl p-10 group transition-all duration-700">
-        {/* Main Map Content - Direct ECharts with Manually Prefetched GeoJSON */}
+        {/* Main Map Content */}
         <div 
           ref={mapRef} 
           className={`w-full h-full transition-all duration-1000 ${mapLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}

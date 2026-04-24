@@ -1,4 +1,5 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import Dashboard from './Dashboard';
 import SchoolAnalytics from './SchoolAnalytics';
 import GISMap from './GISMap';
@@ -11,29 +12,18 @@ import InfrastructureAnalytics from './InfrastructureAnalytics';
 import EnvironmentAnalytics from './EnvironmentAnalytics';
 import { 
   Sparkles, BrainCircuit, ChevronDown, ChevronUp, RefreshCw, 
-  AlertCircle, FileCheck, BrainCircuit as BrainIcon, Trophy
+  AlertCircle, BrainCircuit as BrainIcon 
 } from 'lucide-react';
 import { getAIInsight } from '../services/geminiService';
-import { Language, Theme } from '../types';
 
-interface ModuleViewProps {
-  activeTab: string;
-  activeSubTab: string;
-  setActiveSubTab: (id: string) => void;
-  language?: Language;
-  region?: string;
-  schoolType?: string;
-  theme?: Theme;
-}
-
-const ModuleView: React.FC<ModuleViewProps> = ({ 
+const ModuleView = ({ 
   activeTab, activeSubTab, setActiveSubTab, language = 'en', region = 'All India', schoolType = 'Independent', theme = 'light' 
 }) => {
-  const [briefing, setBriefing] = useState<string | null>(null);
+  const [briefing, setBriefing] = useState(null);
   const [isBriefingLoading, setIsBriefingLoading] = useState(false);
   const [isBriefingExpanded, setIsBriefingExpanded] = useState(true);
   const [syncError, setSyncError] = useState(false);
-  const lastRequestRef = useRef<string>("");
+  const lastRequestRef = useRef("");
 
   useEffect(() => {
     let isMounted = true;
@@ -50,13 +40,13 @@ const ModuleView: React.FC<ModuleViewProps> = ({
       
       try {
         const summary = `Executive View: ${activeTab}, Module: ${activeSubTab}, Geo: ${region}, Filter: ${schoolType}`;
-        const text = await getAIInsight(`${activeTab} ${activeSubTab}`, summary, language as Language);
+        const text = await getAIInsight(`${activeTab} ${activeSubTab}`, summary, language);
         
         if (isMounted) {
           setBriefing(text);
           setSyncError(text.includes("deferred") || text.includes("stabilizing"));
         }
-      } catch (e: any) {
+      } catch (e) {
         if (isMounted) {
           console.error("Briefing Sync Error:", e?.message || "Channel timeout");
           setSyncError(true);
@@ -119,7 +109,7 @@ const ModuleView: React.FC<ModuleViewProps> = ({
     </div>
   );
 
-  const renderPlaceholder = (title: string, icon: React.ReactNode) => (
+  const renderPlaceholder = (title, icon) => (
     <div className="bg-white dark:bg-slate-900 p-24 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-3xl flex flex-col items-center justify-center text-center gap-8">
       <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-3xl flex items-center justify-center text-blue-500 animate-pulse">
         {icon}
@@ -132,7 +122,7 @@ const ModuleView: React.FC<ModuleViewProps> = ({
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard': 
-        return <Dashboard language={language as Language} activeSubTab={activeSubTab} region={region} schoolType={schoolType} />;
+        return <Dashboard language={language} activeSubTab={activeSubTab} region={region} schoolType={schoolType} />;
       case 'school': 
         return <SchoolAnalytics activeSubTab={activeSubTab} setActiveSubTab={setActiveSubTab} region={region} />;
       case 'academic_horizon':

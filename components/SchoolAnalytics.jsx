@@ -1,10 +1,7 @@
-import React, { useMemo, useState, useEffect } from 'react';
+
+import React, { useMemo, useState } from 'react';
 import { 
-  ChevronRight, Activity, Building2, GraduationCap, Users, 
-  School, Info, Target, Calculator, ArrowRightLeft, Users2, 
-  BrainCircuit, LayoutGrid, Ruler, Scaling, ShieldCheck, Globe, 
-  Search, BookOpen, UserRound, TrendingUp, Award, BarChart,
-  Table as TableIcon, Download, FileText, Layout, X, MapPin
+  ChevronRight, School, Globe, LayoutGrid, FileText, X
 } from 'lucide-react';
 import GISMap from './GISMap';
 import DistanceTool from './DistanceTool';
@@ -12,25 +9,19 @@ import { MODULE_DEFINITIONS } from '../constants';
 import { dashboardData } from '../mockData';
 import * as Charts from './ExecutiveCharts';
 
-interface SchoolAnalyticsProps {
-  activeSubTab: string;
-  setActiveSubTab?: (id: string) => void;
-  region?: string;
-}
-
-const SchoolAnalytics: React.FC<SchoolAnalyticsProps> = ({ activeSubTab, setActiveSubTab, region = 'All India' }) => {
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+const SchoolAnalytics = ({ activeSubTab, setActiveSubTab, region = 'All India' }) => {
+  const [viewMode, setViewMode] = useState('chart');
   
   const currentModule = MODULE_DEFINITIONS.find(m => m.id === 'school');
   const subTabs = currentModule?.subTabs || [];
   
   const currentData = useMemo(() => {
     if (!dashboardData || !dashboardData.regions) return dashboardData?.default || {};
-    const regionData = (dashboardData.regions as any)[region] || (dashboardData.regions as any)['All India'];
+    const regionData = dashboardData.regions[region] || dashboardData.regions['All India'];
     return { ...dashboardData.default, ...regionData };
   }, [region]);
 
-  const renderAuditControls = (label: string, data: any[]) => (
+  const renderAuditControls = (label) => (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4 mb-8">
        <div className="space-y-1">
           <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Institutional Audit Command</p>
@@ -50,9 +41,9 @@ const SchoolAnalytics: React.FC<SchoolAnalyticsProps> = ({ activeSubTab, setActi
     </div>
   );
 
-  const renderDataDisplay = (label: string, data: any[] = [], chartType: 'radar' | 'bar' | 'donut' | 'line' = 'radar') => (
+  const renderDataDisplay = (label, data = [], chartType = 'radar') => (
     <div id="printable-report" className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-8 animate-in slide-in-from-bottom-3 duration-500 min-h-[650px]">
-      {renderAuditControls(label, data)}
+      {renderAuditControls(label)}
       {viewMode === 'chart' ? (
         <div className="min-h-[550px] w-full flex flex-col items-center justify-center bg-slate-50/10 rounded-[2rem] border border-dashed border-slate-100 p-4">
           {chartType === 'radar' && <Charts.ExecutiveRadarChart data={data} />}
@@ -71,7 +62,7 @@ const SchoolAnalytics: React.FC<SchoolAnalyticsProps> = ({ activeSubTab, setActi
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {data.map((item: any, i: number) => (
+              {data.map((item, i) => (
                 <tr key={i} className="hover:bg-slate-50/70 transition-colors">
                   <td className="px-6 py-4 font-black text-[#002B5B] uppercase text-[10px]">{item.n || item.level}</td>
                   <td className="px-6 py-4 font-black text-xl text-blue-600">{item.v?.toLocaleString() || 'Synced'}</td>
@@ -112,14 +103,12 @@ const SchoolAnalytics: React.FC<SchoolAnalyticsProps> = ({ activeSubTab, setActi
                 </div>
               </div>
               <div onClick={() => setActiveSubTab?.('teacher_details')} className="bg-[#FFF9F2] rounded-[2.5rem] p-8 border border-[#FFE8CC] shadow-2xl border-l-[12px] border-l-[#FF9933] cursor-pointer hover:-translate-y-1 transition-all group overflow-hidden relative">
-                <Users size={180} className="absolute -right-16 -top-16 opacity-[0.03] group-hover:rotate-6 transition-transform" />
-                <div className="flex items-center gap-4 mb-6"><Users size={28} className="text-[#FF9933]" /><h3 className="text-xl font-black text-[#8B4513] uppercase tracking-tight">Faculty Hub</h3></div>
+                <div className="flex items-center gap-4 mb-6"><h3 className="text-xl font-black text-[#8B4513] uppercase tracking-tight">Faculty Hub</h3></div>
                 <div className="p-6 bg-white/60 rounded-[1.5rem] backdrop-blur-xl shadow-inner inline-block"><span className="text-5xl font-black text-[#8B4513] tracking-tighter">1.34M</span></div>
                 <p className="mt-6 text-[10px] font-black text-orange-800 uppercase tracking-widest opacity-60">Verified Core Staff</p>
               </div>
               <div onClick={() => setActiveSubTab?.('student_details')} className="bg-[#FFF0F5] rounded-[2.5rem] p-8 border border-[#FFD1DC] shadow-2xl border-l-[12px] border-l-[#EC4899] cursor-pointer hover:-translate-y-1 transition-all group overflow-hidden relative">
-                <GraduationCap size={180} className="absolute -right-16 -top-16 opacity-[0.03] group-hover:-rotate-6 transition-transform" />
-                <div className="flex items-center gap-4 mb-6"><GraduationCap size={28} className="text-[#EC4899]" /><h3 className="text-xl font-black text-[#9D174D] uppercase tracking-tight">Student Hub</h3></div>
+                <div className="flex items-center gap-4 mb-6"><h3 className="text-xl font-black text-[#9D174D] uppercase tracking-tight">Student Hub</h3></div>
                 <div className="p-6 bg-white/60 rounded-[1.5rem] backdrop-blur-xl shadow-inner inline-block"><span className="text-5xl font-black text-[#9D174D] tracking-tighter">2.84Cr</span></div>
                 <p className="mt-6 text-[10px] font-black text-rose-800 uppercase tracking-widest opacity-60">Total Enrollment Registry</p>
               </div>
@@ -185,7 +174,6 @@ const SchoolAnalytics: React.FC<SchoolAnalyticsProps> = ({ activeSubTab, setActi
             <h4 className="text-2xl font-black mb-12 border-b border-white/10 pb-6 flex items-center gap-3">
               <Globe className="text-cyan-400" size={28} /> National Institutional Footprint
             </h4>
-            {/* The rest of the content is rendered by the switch statement in renderContent */}
             {renderContent()}
           </div>
         </div>

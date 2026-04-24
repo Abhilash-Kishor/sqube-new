@@ -1,31 +1,31 @@
-import { GoogleGenAI } from "@google/genai";
-import { Language } from "../types";
 
-const LANG_NAMES: Record<Language, string> = {
+import { GoogleGenAI } from "@google/genai";
+
+const LANG_NAMES = {
   en: "English", hi: "Hindi", mr: "Marathi", ta: "Tamil", te: "Telugu", bn: "Bengali"
 };
 
-const insightCache = new Map<string, { text: string; expiry: number }>();
-const pendingRequests = new Map<string, Promise<string>>();
+const insightCache = new Map();
+const pendingRequests = new Map();
 const CACHE_DURATION = 1000 * 60 * 30; 
 let lastRequestTime = 0;
 const MIN_REQUEST_GAP = 5000; 
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
  * Highly aggressive truncation to prevent MakerSuite Proxy 500 errors.
  */
-const sanitizeData = (data: string): string => {
+const sanitizeData = (data) => {
   return data.replace(/\s+/g, ' ').substring(0, 800);
 };
 
 export const getAIInsight = async (
-  moduleName: string, 
-  dataSummary: string, 
-  targetLanguage: Language = 'en',
+  moduleName, 
+  dataSummary, 
+  targetLanguage = 'en',
   retryCount = 0
-): Promise<string> => {
+) => {
   const sanitizedSummary = sanitizeData(dataSummary);
   const cacheKey = `${moduleName}-${targetLanguage}-${sanitizedSummary.substring(0, 50)}`;
   
@@ -35,10 +35,10 @@ export const getAIInsight = async (
   }
 
   if (pendingRequests.has(cacheKey)) {
-    return pendingRequests.get(cacheKey)!;
+    return pendingRequests.get(cacheKey);
   }
 
-  const executeRequest = async (): Promise<string> => {
+  const executeRequest = async () => {
     const now = Date.now();
     const timeSinceLast = now - lastRequestTime;
     
@@ -51,7 +51,7 @@ export const getAIInsight = async (
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
-        contents: `Analyst: CBSE Advisor. Lang: ${LANG_NAMES[targetLanguage]}. Context: ${sanitizedSummary}. Goal: Brief executive insight (max 50 words). No markdown.`,
+        contents: `Analyst: CBSE Advisor. Lang: ${LANG_NAMES[targetLanguage] || 'English'}. Context: ${sanitizedSummary}. Goal: Brief executive insight (max 50 words). No markdown.`,
         config: { 
           temperature: 0.3,
           topP: 0.8
@@ -61,7 +61,7 @@ export const getAIInsight = async (
       const result = response.text?.trim() || "National summary pending registry stabilization.";
       insightCache.set(cacheKey, { text: result, expiry: Date.now() + CACHE_DURATION });
       return result;
-    } catch (error: any) {
+    } catch (error) {
       const errorMsg = error?.message || String(error);
       console.error(`Gemini Failure [${moduleName}]:`, errorMsg);
       
@@ -82,7 +82,7 @@ export const getAIInsight = async (
   return requestPromise;
 };
 
-export const startNationalChat = async (contextData: any) => {
+export const startNationalChat = async (contextData) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     // Aggressive context trimming for chat to avoid 500 errors
@@ -94,7 +94,7 @@ export const startNationalChat = async (contextData: any) => {
         thinkingConfig: { thinkingBudget: 8000 }
       }
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Chat Init Error:", error?.message);
     return null;
   }

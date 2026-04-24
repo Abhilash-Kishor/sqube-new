@@ -1,24 +1,19 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, Send, X, Minimize2, Sparkles, FileText, Download, User, BrainCircuit } from 'lucide-react';
+import { Bot, Send, X, Minimize2, Download, User, BrainCircuit } from 'lucide-react';
 import { startNationalChat } from '../services/geminiService';
 import { dashboardData } from '../mockData';
 
-interface Message {
-  role: 'user' | 'model';
-  text: string;
-}
-
-const AIAnalystChat: React.FC = () => {
+const AIAnalystChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState([
     { role: 'model', text: 'Greetings, Executive. I am the S³ National AI Advisor. I have synchronized the latest OASIS National Repository data. How may I assist your policy formulation today?' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const chatInstanceRef = useRef<any>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const chatInstanceRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     if (scrollRef.current) {

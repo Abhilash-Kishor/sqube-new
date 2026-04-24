@@ -1,32 +1,22 @@
+
 import React, { useState, useMemo, useEffect } from 'react';
 import { 
   FileCheck, 
-  Search, 
   ShieldCheck, 
   CheckCircle2, 
   Clock, 
   AlertCircle,
-  BarChart3,
-  LayoutGrid,
-  FileText,
-  ChevronRight
+  LayoutGrid
 } from 'lucide-react';
 import * as Charts from './ExecutiveCharts';
 import { dashboardData } from '../mockData';
 import { MODULE_DEFINITIONS } from '../constants';
 
-interface AffiliationAnalyticsProps {
-  activeSubTab: string;
-  setActiveSubTab: (id: string) => void;
-  region?: string;
-}
-
-const AffiliationAnalytics: React.FC<AffiliationAnalyticsProps> = ({ 
+const AffiliationAnalytics = ({ 
   activeSubTab, 
   setActiveSubTab,
   region = 'All India' 
 }) => {
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
   const [isSyncing, setIsSyncing] = useState(true);
 
   const currentModule = MODULE_DEFINITIONS.find(m => m.id === 'affiliation');
@@ -44,7 +34,7 @@ const AffiliationAnalytics: React.FC<AffiliationAnalyticsProps> = ({
 
   const currentData = useMemo(() => {
     if (!dashboardData || !dashboardData.regions) return dashboardData?.default || {};
-    const data = (dashboardData.regions as any)[region] || dashboardData.default;
+    const data = dashboardData.regions[region] || dashboardData.default;
     return data;
   }, [region]);
 

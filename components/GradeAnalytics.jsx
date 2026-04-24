@@ -14,13 +14,9 @@ import {
 } from 'lucide-react';
 import * as Charts from './ExecutiveCharts';
 
-interface GradeAnalyticsProps {
-  language?: 'en' | 'hi';
-}
-
-const GradeAnalytics: React.FC<GradeAnalyticsProps> = ({ language = 'en' }) => {
-  const [selectedClass, setSelectedClass] = useState<'X' | 'XII'>('X');
-  const scrollRef = useRef<HTMLDivElement>(null);
+const GradeAnalytics = ({ language = 'en' }) => {
+  const [selectedClass, setSelectedClass] = useState('X');
+  const scrollRef = useRef(null);
 
   // Auto-scroll logic for Grade Tiles
   useEffect(() => {

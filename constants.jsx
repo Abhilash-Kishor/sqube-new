@@ -28,20 +28,6 @@ import {
   Compass
 } from 'lucide-react';
 
-export interface SubTab {
-  id: string;
-  label: string;
-}
-
-export interface ModuleDefinition {
-  id: string;
-  title: string;
-  subtitle: string;
-  icon: React.ReactNode;
-  iconType: string;
-  subTabs: SubTab[];
-}
-
 export const CBSE_REGIONS = [
   'Ajmer', 'Bengaluru', 'Bhopal', 'Bhubaneswar', 'Chandigarh', 'Chennai', 
   'Delhi East', 'Delhi West', 'Guwahati', 'Noida', 'Panchkula', 'Patna', 
@@ -52,7 +38,7 @@ export const SCHOOL_TYPES = [
   'Independent', 'Govt', 'KVS', 'NVS'
 ];
 
-export const MODULE_DEFINITIONS: ModuleDefinition[] = [
+export const MODULE_DEFINITIONS = [
   { 
     id: 'dashboard', 
     title: 'कार्यकारी सारांश', 
@@ -183,7 +169,7 @@ export const STATES_INDIA = [
   'All India', 'Delhi', 'Maharashtra', 'Tamil Nadu', 'Uttar Pradesh', 'Karnataka', 'West Bengal', 'Bihar', 'Rajasthan', 'Gujarat'
 ];
 
-export const DISTRICTS_BY_STATE: Record<string, string[]> = {
+export const DISTRICTS_BY_STATE = {
   'All India': ['Select State First'],
   'Delhi': ['New Delhi', 'South Delhi', 'North Delhi', 'East Delhi', 'West Delhi'],
   'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Thane', 'Nashik'],
@@ -193,7 +179,7 @@ export const DISTRICTS_BY_STATE: Record<string, string[]> = {
   'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot']
 };
 
-export const MOCK_REGIONAL_DATA: Record<string, any> = {
+export const MOCK_REGIONAL_DATA = {
   'All India': { schools: 30124, teachers: 1340000, students: 28400000, gpi: 0.98, ptr: 24, passRate: 91.2, rank: 0, teacherAdequacy: 88, infraScore: 82, digitalIndex: 75, nepReady: 82 },
   'Delhi West': { schools: 2450, teachers: 84000, students: 1800000, gpi: 1.02, ptr: 21, passRate: 94.5, rank: 2, teacherAdequacy: 92, infraScore: 88, digitalIndex: 85, nepReady: 89 },
   'Chennai': { schools: 3200, teachers: 120000, students: 2400000, gpi: 0.96, ptr: 20, passRate: 92.8, rank: 1, teacherAdequacy: 95, infraScore: 90, digitalIndex: 88, nepReady: 92 },
@@ -201,20 +187,7 @@ export const MOCK_REGIONAL_DATA: Record<string, any> = {
   'Ajmer': { schools: 2100, teachers: 95000, students: 1600000, gpi: 1.05, ptr: 19, passRate: 95.2, rank: 4, teacherAdequacy: 86, infraScore: 84, digitalIndex: 80, nepReady: 85 },
 };
 
-export interface KPI_Definition {
-  label: string;
-  key: string;
-  value: string;
-  trend: 'up' | 'down';
-  change: string;
-  description: string;
-  whatIsIt: string;
-  whyItMatters: string;
-  howToInterpret: string;
-  icon: React.ReactNode;
-}
-
-export const QUICK_FACTS_KPIS: KPI_Definition[] = [
+export const QUICK_FACTS_KPIS = [
   { 
     label: 'Total Schools', 
     key: 'schools', 
@@ -313,15 +286,7 @@ export const QUICK_FACTS_KPIS: KPI_Definition[] = [
   },
 ];
 
-export interface CompositeIndicator {
-  label: string;
-  key: string;
-  icon: React.ReactNode;
-  description: string;
-  color: string;
-}
-
-export const COMPOSITE_INDICATORS: CompositeIndicator[] = [
+export const COMPOSITE_INDICATORS = [
   {
     label: 'Teacher Adequacy Index',
     key: 'teacherAdequacy',

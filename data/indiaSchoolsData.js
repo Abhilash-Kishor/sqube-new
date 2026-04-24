@@ -1,11 +1,5 @@
-export interface IndiaSchoolData {
-  state: string;
-  schools: number;
-  students: number;
-  teachers: number;
-}
 
-export const INDIA_SCHOOLS_DATA: IndiaSchoolData[] = [
+export const INDIA_SCHOOLS_DATA = [
   { state: 'Uttar Pradesh', schools: 9238, students: 9238000, teachers: 369520 },
   { state: 'Maharashtra', schools: 5812, students: 5812000, teachers: 232480 },
   { state: 'Karnataka', schools: 5327, students: 5327000, teachers: 213080 },

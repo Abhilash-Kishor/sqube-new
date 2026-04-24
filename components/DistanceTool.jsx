@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Ruler, ArrowRightLeft, Plus, Minus } from 'lucide-react';
 
-import esriConfig from "@arcgis/core/config.js";
-import * as intl from "@arcgis/core/intl.js";
 import ArcGISMap from "@arcgis/core/Map.js";
 import MapView from "@arcgis/core/views/MapView.js";
 import Graphic from "@arcgis/core/Graphic.js";
@@ -21,17 +20,17 @@ const PRESET_SCHOOLS = [
   { id: '5', name: 'Jawahar Navodaya Vidyalaya, Rohini', udise: '07010500205', lat: 28.7200, lng: 77.1100 }
 ];
 
-const DistanceTool: React.FC = () => {
-  const mapDiv = useRef<HTMLDivElement>(null);
+const DistanceTool = () => {
+  const mapDiv = useRef(null);
   const [schoolA, setSchoolA] = useState(PRESET_SCHOOLS[0].id);
   const [schoolB, setSchoolB] = useState(PRESET_SCHOOLS[1].id);
-  const [distance, setDistance] = useState<number | null>(null);
+  const [distance, setDistance] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   
-  const viewRef = useRef<MapView | null>(null);
-  const graphicsLayerRef = useRef<GraphicsLayer | null>(null);
+  const viewRef = useRef(null);
+  const graphicsLayerRef = useRef(null);
 
-  const calculateAndDraw = React.useCallback(() => {
+  const calculateAndDraw = useCallback(() => {
     if (!graphicsLayerRef.current || !viewRef.current) return;
     const sA = PRESET_SCHOOLS.find(s => s.id === schoolA);
     const sB = PRESET_SCHOOLS.find(s => s.id === schoolB);
@@ -71,7 +70,7 @@ const DistanceTool: React.FC = () => {
     view.when(() => {
       setMapLoaded(true);
       calculateAndDraw();
-    }).catch((err: any) => {
+    }).catch((err) => {
       console.warn("Distance Map Init Error:", err?.message);
     });
 
@@ -85,8 +84,12 @@ const DistanceTool: React.FC = () => {
 
   useEffect(() => { if (mapLoaded) calculateAndDraw(); }, [mapLoaded, calculateAndDraw]);
 
-  const zoomIn = () => viewRef.current?.zoom !== undefined && (viewRef.current.zoom += 1);
-  const zoomOut = () => viewRef.current?.zoom !== undefined && (viewRef.current.zoom -= 1);
+  const zoomIn = () => {
+    if (viewRef.current) viewRef.current.zoom += 1;
+  };
+  const zoomOut = () => {
+    if (viewRef.current) viewRef.current.zoom -= 1;
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

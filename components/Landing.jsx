@@ -1,20 +1,9 @@
 
 import React from 'react';
 import { MODULE_DEFINITIONS } from '../constants';
-import { ChevronRight, Search, Bell, Sparkles, LogOut, ArrowRight, Languages, Moon, Sun } from 'lucide-react';
-import { Language, Theme } from '../types';
+import { ChevronRight, Sparkles, LogOut, ArrowRight, Moon, Sun } from 'lucide-react';
 
-interface LandingProps {
-  onEnterApp: (tabId: string) => void;
-  user: any;
-  onLogout: () => void;
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-const Landing: React.FC<LandingProps> = ({ onEnterApp, user, onLogout, language, setLanguage, theme, toggleTheme }) => {
+const Landing = ({ onEnterApp, user, onLogout, language, setLanguage, theme, toggleTheme }) => {
   return (
     <div className={`min-h-screen transition-colors duration-500 overflow-x-hidden ${theme === 'dark' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       {/* Mesh Gradient Background */}
@@ -79,7 +68,7 @@ const Landing: React.FC<LandingProps> = ({ onEnterApp, user, onLogout, language,
                 module.iconType === 'pearl-orange' ? 'bg-orange-500' : 
                 module.iconType === 'pearl-green' ? 'bg-emerald-500' : 'bg-indigo-600'
               }`}>
-                {React.cloneElement(module.icon as React.ReactElement<any>, { size: 40 })}
+                {React.cloneElement(module.icon, { size: 40 })}
               </div>
               
               <div className="text-left space-y-2">

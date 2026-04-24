@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useEffect } from 'react';
 import { 
   FileText, 
@@ -6,31 +7,18 @@ import {
   ClipboardList, 
   Trophy, 
   LineChart, 
-  PenTool, 
   Scale, 
-  PieChart, 
-  Link, 
-  Table as TableIcon,
-  Download,
-  Layout,
-  Info,
   ChevronRight,
-  Zap
+  Zap,
+  Link
 } from 'lucide-react';
 import * as Charts from './ExecutiveCharts';
 import { dashboardData } from '../mockData';
 import ResultAtGlance from './ResultAtGlance';
 
-interface ExamAnalyticsProps {
-  region?: string;
-  initialFocus?: 'X' | 'XII';
-  activeSubTab?: string;
-  theme?: 'light' | 'dark';
-}
-
-const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', initialFocus, activeSubTab, theme = 'light' }) => {
-  const [selectedKpi, setSelectedKpi] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+const ExamAnalytics = ({ region = 'All India', initialFocus, activeSubTab, theme = 'light' }) => {
+  const [selectedKpi, setSelectedKpi] = useState(null);
+  const [viewMode, setViewMode] = useState('chart');
   const [isSyncing, setIsSyncing] = useState(true);
 
   useEffect(() => {
@@ -43,7 +31,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
     } else if (activeSubTab === 'leftout_10_11') {
       setSelectedKpi('X: Left-out (10th→11th)');
     } else if (activeSubTab === 'qp_analysis') {
-      setSelectedKpi('XII: Marks & RAP Analysis'); // Example mapping
+      setSelectedKpi('XII: Marks & RAP Analysis'); 
     } else if (activeSubTab === 'theory_practical') {
       setSelectedKpi('XII: Theory-Practical Gap');
     } else if (initialFocus === 'X') {
@@ -60,7 +48,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
 
   const currentData = useMemo(() => {
     if (!dashboardData || !dashboardData.regions) return dashboardData?.default || {};
-    const data = (dashboardData.regions as any)[region] || dashboardData.default;
+    const data = dashboardData.regions[region] || dashboardData.default;
     return data;
   }, [region]);
 
@@ -90,7 +78,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
      return currentData.exam_performance?.rap_analysis || [];
   };
 
-  const renderDetailCanvas = (label: string) => {
+  const renderDetailCanvas = (label) => {
     const data = getActiveData();
     
     return (
@@ -109,7 +97,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
                    Stats
                  </button>
               </div>
-              <button onClick={() => window.print()} className="p-3 bg-rose-50 dark:bg-rose-900/30 text-rose-600 rounded-xl border border-rose-100 dark:border-rose-800 shadow-sm hover:shadow-lg transition-all"><FileText size={18} /></button>
+              <button onClick={() => window.print()} className="p-3 bg-rose-50 dark:bg-rose-900/30 text-rose-600 rounded-xl border border-rose-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all"><FileText size={18} /></button>
            </div>
         </div>
 
@@ -143,7 +131,7 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-                   {data.map((row: any, i: number) => (
+                   {data.map((row, i) => (
                      <tr key={i} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/50 transition-colors">
                         <td className="px-8 py-5 font-black text-[#002B5B] dark:text-slate-300 text-xs uppercase">{row.n}</td>
                         <td className="px-8 py-5 font-black text-2xl text-rose-600 text-center">{row.v?.toFixed(1) || '0.0'}{label.includes('Drop-out') ? '%' : ''}</td>
@@ -172,7 +160,6 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
     );
   }
 
-  // If sub-tab is Result at Glance, show that specific view
   if (activeSubTab === 'result_at_glance') {
     return <ResultAtGlance region={region} theme={theme} />;
   }
@@ -180,7 +167,6 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
   return (
     <div className="space-y-10 animate-in fade-in duration-700 pb-40">
       <div className="bg-[#E11D48] rounded-[3rem] p-16 text-white flex items-center gap-12 shadow-3xl relative overflow-hidden border-b-8 border-rose-900/20">
-        <Scale size={240} className="absolute right-0 top-0 opacity-10 rotate-12 scale-125 text-white" />
         <div className="w-28 h-28 bg-white/10 rounded-[2rem] flex items-center justify-center backdrop-blur-3xl border border-white/20 shadow-2xl group">
           <FileText size={56} className="group-hover:scale-105 transition-transform" />
         </div>
@@ -229,15 +215,15 @@ const ExamAnalytics: React.FC<ExamAnalyticsProps> = ({ region = 'All India', ini
 
         <div className="lg:col-span-8">
            {selectedKpi ? renderDetailCanvas(selectedKpi) : (
-             <div className="h-full min-h-[750px] bg-slate-50/50 dark:bg-slate-800/20 border-4 border-dashed border-slate-200 dark:border-slate-800 rounded-[4rem] flex flex-col items-center justify-center text-center p-20 shadow-inner">
-                <div className="w-32 h-32 bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-3xl flex items-center justify-center text-rose-300 mb-10 animate-bounce ring-[10px] ring-white/40 dark:ring-slate-800/40">
-                   <Zap size={64} strokeWidth={1} />
-                </div>
-                <h3 className="text-4xl font-black text-slate-400 uppercase tracking-tighter">Diagnostic Analytics</h3>
-                <p className="text-slate-400 text-xs font-black uppercase tracking-[0.4em] mt-6 max-w-lg leading-relaxed">
-                  Select an institutional performance metric from the sovereign domain sidebar to initiate analytics.
-                </p>
-             </div>
+              <div className="h-full min-h-[750px] bg-slate-50/50 dark:bg-slate-800/20 border-4 border-dashed border-slate-200 dark:border-slate-800 rounded-[4rem] flex flex-col items-center justify-center text-center p-20 shadow-inner">
+                 <div className="w-32 h-32 bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-3xl flex items-center justify-center text-rose-300 mb-10 animate-bounce ring-[10px] ring-white/40 dark:ring-slate-800/40">
+                    <Zap size={64} strokeWidth={1} />
+                 </div>
+                 <h3 className="text-4xl font-black text-slate-400 uppercase tracking-tighter">Diagnostic Analytics</h3>
+                 <p className="text-slate-400 text-xs font-black uppercase tracking-[0.4em] mt-6 max-w-lg leading-relaxed">
+                   Select an institutional performance metric from the sovereign domain sidebar to initiate analytics.
+                 </p>
+              </div>
            )}
         </div>
       </div>

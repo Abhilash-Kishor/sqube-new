@@ -13,7 +13,7 @@ const CBSE_REGIONS_LIST = [
   'Prayagraj', 'Pune', 'Thiruvananthapuram', 'Vijayawada'
 ];
 
-const generateHighVolumeData = (baseVal: number, variance: number, count: number = 155) => {
+const generateHighVolumeData = (baseVal, variance, count = 155) => {
   const data = [];
   if (!INDIAN_STATES.length || !CBSE_REGIONS_LIST.length) return [];
   
@@ -30,7 +30,7 @@ const generateHighVolumeData = (baseVal: number, variance: number, count: number
   return data;
 };
 
-export const dashboardData: any = {
+export const dashboardData = {
   "regions": {
     "All India": {
       "management": [{ "n": "Govt/State", "v": 12050 }, { "n": "Independent", "v": 15062 }, { "n": "KVS/NVS", "v": 3012 }],

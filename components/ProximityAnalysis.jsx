@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Target, Plus, Minus } from 'lucide-react';
 
-import esriConfig from "@arcgis/core/config.js";
-import * as intl from "@arcgis/core/intl.js";
 import ArcGISMap from "@arcgis/core/Map.js";
 import MapView from "@arcgis/core/views/MapView.js";
 import Graphic from "@arcgis/core/Graphic.js";
@@ -26,17 +25,17 @@ const AMENITY_CATEGORIES = [
   { id: 'hospital', name: 'Hospital', icon: '🏥' }
 ];
 
-const ProximityAnalysis: React.FC = () => {
-  const mapDiv = useRef<HTMLDivElement>(null);
+const ProximityAnalysis = () => {
+  const mapDiv = useRef(null);
   const [selectedSchoolId, setSelectedSchoolId] = useState(PRESET_SCHOOLS[0].id);
   const [activeAmenity, setActiveAmenity] = useState(AMENITY_CATEGORIES[0].id);
-  const [nearbyResults, setNearbyResults] = useState<{name: string, distance: number}[]>([]);
+  const [nearbyResults, setNearbyResults] = useState([]);
   const [mapLoaded, setMapLoaded] = useState(false);
   
-  const viewRef = useRef<MapView | null>(null);
-  const graphicsLayerRef = useRef<GraphicsLayer | null>(null);
+  const viewRef = useRef(null);
+  const graphicsLayerRef = useRef(null);
 
-  const performAnalysis = React.useCallback(() => {
+  const performAnalysis = useCallback(() => {
     if (!graphicsLayerRef.current || !viewRef.current) return;
     
     const school = PRESET_SCHOOLS.find(s => s.id === selectedSchoolId);
@@ -51,7 +50,7 @@ const ProximityAnalysis: React.FC = () => {
     });
 
     const amenityType = AMENITY_CATEGORIES.find(a => a.id === activeAmenity);
-    const results: {name: string, distance: number, pt: Point}[] = [];
+    const results = [];
     
     for (let i = 1; i <= 3; i++) {
       const angle = Math.random() * Math.PI * 2;
@@ -119,8 +118,12 @@ const ProximityAnalysis: React.FC = () => {
     if (mapLoaded) performAnalysis();
   }, [mapLoaded, performAnalysis]);
 
-  const zoomIn = () => viewRef.current?.zoom !== undefined && (viewRef.current.zoom += 1);
-  const zoomOut = () => viewRef.current?.zoom !== undefined && (viewRef.current.zoom -= 1);
+  const zoomIn = () => {
+    if (viewRef.current) viewRef.current.zoom += 1;
+  };
+  const zoomOut = () => {
+    if (viewRef.current) viewRef.current.zoom -= 1;
+  };
 
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
@@ -154,11 +157,11 @@ const ProximityAnalysis: React.FC = () => {
             <div className="space-y-4">
                {nearbyResults.map((res, i) => (
                 <div key={i} className={`p-5 rounded-2xl flex items-center justify-between border ${i === 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800' : 'bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-800'}`}>
-                  <span className="text-[11px] font-black text-[#002B5B] dark:text-slate-300 uppercase">{res.name}</span>
-                  <div className="text-right">
-                    <span className="text-xl font-black text-blue-600 dark:text-blue-400">{res.distance.toFixed(2)}</span>
-                    <span className="text-[8px] font-black text-slate-400 uppercase ml-1">KMs</span>
-                  </div>
+                   <span className="text-[11px] font-black text-[#002B5B] dark:text-slate-300 uppercase">{res.name}</span>
+                   <div className="text-right">
+                     <span className="text-xl font-black text-blue-600 dark:text-blue-400">{res.distance.toFixed(2)}</span>
+                     <span className="text-[8px] font-black text-slate-400 uppercase ml-1">KMs</span>
+                   </div>
                 </div>
                ))}
             </div>

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Globe, Search, Plus, Minus, Navigation } from 'lucide-react';
 import { STATES_INDIA } from '../constants';
@@ -9,7 +10,7 @@ import UniqueValueRenderer from "@arcgis/core/renderers/UniqueValueRenderer.js";
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js";
 import { INDIA_SCHOOLS_DATA } from '../data/indiaSchoolsData';
 
-const stateBounds: Record<string, { center: [number, number], zoom: number }> = {
+const stateBounds = {
   'National View': { center: [78.9629, 22.5937], zoom: 5 },
   'All India': { center: [78.9629, 22.5937], zoom: 5 },
   'Delhi': { center: [77.1025, 28.7041], zoom: 11 },
@@ -20,23 +21,16 @@ const stateBounds: Record<string, { center: [number, number], zoom: number }> = 
   'Gujarat': { center: [72.1919, 22.2587], zoom: 7 }
 };
 
-const GISMap: React.FC = () => {
-  const mapDiv = useRef<HTMLDivElement>(null);
+const GISMap = () => {
+  const mapDiv = useRef(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [selectedState, setSelectedState] = useState('Delhi');
-  const [hoverInfo, setHoverInfo] = useState<{
-    state: string;
-    schools: number;
-    students: number;
-    teachers: number;
-    x: number;
-    y: number;
-  } | null>(null);
+  const [hoverInfo, setHoverInfo] = useState(null);
 
-  const viewRef = useRef<MapView | null>(null);
-  const featureLayerRef = useRef<FeatureLayer | null>(null);
+  const viewRef = useRef(null);
+  const featureLayerRef = useRef(null);
 
-  const getShadeColor = (schools: number) => {
+  const getShadeColor = (schools) => {
     if (schools > 5000) return [0, 43, 91, 0.85]; // Darkest Blue
     if (schools > 2000) return [0, 102, 204, 0.75]; // Dark Blue
     if (schools > 500) return [102, 178, 255, 0.65]; // Medium Blue
@@ -117,7 +111,7 @@ const GISMap: React.FC = () => {
             const results = response.results.filter(r => r.type === "graphic" && r.layer.id === "indiaStates");
             
             if (results.length > 0) {
-              const graphic = (results[0] as any).graphic;
+              const graphic = results[0].graphic;
               const attrs = graphic.attributes;
               const stateName = attrs.State_Name || attrs.ST_NM || attrs.ST_NAME || attrs.state_name;
               
@@ -148,7 +142,7 @@ const GISMap: React.FC = () => {
             }
           });
         }
-      } catch (err: any) {
+      } catch (err) {
         console.warn("ArcGIS Initialize Error:", err?.message);
       }
     };
@@ -183,7 +177,7 @@ const GISMap: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-[2rem] h-[600px] shadow-2xl relative overflow-hidden border border-slate-200 dark:border-slate-800 no-print">
-      {/* Map Container - Explicitly taking full size */}
+      {/* Map Container */}
       <div 
         ref={mapDiv} 
         className="absolute inset-0 w-full h-full" 
@@ -197,7 +191,7 @@ const GISMap: React.FC = () => {
         </div>
       )}
 
-      {/* Hover Tooltip - Matching image001 design */}
+      {/* Hover Tooltip */}
       {hoverInfo && (
         <div 
           className="absolute z-[100] bg-[#FFC107] p-5 rounded-2xl shadow-2xl pointer-events-none animate-in fade-in zoom-in-95 duration-200 border-2 border-white/20 backdrop-blur-sm transition-all"
@@ -229,7 +223,7 @@ const GISMap: React.FC = () => {
         </div>
       )}
 
-      {/* Manual UI Controls to bypass Calcite Icon Errors */}
+      {/* Manual UI Controls */}
       <div className="absolute left-4 bottom-8 z-20 flex flex-col gap-2">
         <button onClick={zoomIn} className="w-10 h-10 bg-white/95 dark:bg-slate-800 text-slate-700 dark:text-white rounded-lg shadow-xl flex items-center justify-center hover:bg-white transition-all border border-slate-200 dark:border-slate-700">
           <Plus size={18} />

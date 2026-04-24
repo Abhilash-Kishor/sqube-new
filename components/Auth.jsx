@@ -1,28 +1,21 @@
 
 import React, { useState } from 'react';
 import { User, Lock, KeyRound, ShieldCheck, ArrowRight } from 'lucide-react';
-import { Language } from '../types';
 
-interface AuthProps {
-  onLogin: (username: string) => void;
-  institution: 'cbse' | 'nvs' | 'kvs';
-  language?: Language;
-}
-
-const Auth: React.FC<AuthProps> = ({ onLogin, institution, language }) => {
-  const [step, setStep] = useState<'credentials' | 'otp'>('credentials');
+const Auth = ({ onLogin, institution, language }) => {
+  const [step, setStep] = useState('credentials');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [otp, setOtp] = useState('');
 
-  const handleCredentials = (e: React.FormEvent) => {
+  const handleCredentials = (e) => {
     e.preventDefault();
     if (username && password) {
       setStep('otp');
     }
   };
 
-  const handleOtp = (e: React.FormEvent) => {
+  const handleOtp = (e) => {
     e.preventDefault();
     if (otp.length === 6) {
       onLogin(username);
@@ -77,7 +70,7 @@ const Auth: React.FC<AuthProps> = ({ onLogin, institution, language }) => {
       <div className={`absolute -bottom-40 -right-40 w-96 h-96 rounded-full opacity-10 blur-3xl ${branding.bg === 'cbse-gradient' ? 'bg-indigo-600' : branding.bg}`}></div>
 
       <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 border border-slate-100 dark:border-slate-800">
-        {/* Branding Side - Added bg-[#002B5B] as safety fallback */}
+        {/* Branding Side */}
         <div className={`${branding.bg} bg-[#002B5B] p-12 text-white flex flex-col justify-between hidden md:flex relative overflow-hidden`}>
           <div className="absolute top-0 right-0 p-20 opacity-10 scale-150 rotate-12">
             <ShieldCheck size={400} />
@@ -155,8 +148,8 @@ const Auth: React.FC<AuthProps> = ({ onLogin, institution, language }) => {
             <form onSubmit={handleOtp} className="space-y-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 p-5 rounded-2xl border border-emerald-100 dark:border-emerald-800">
-                  <ShieldCheck size={20} />
-                  <span className="text-xs font-black uppercase tracking-widest leading-none">OTP sent to registered mobile</span>
+                   <ShieldCheck size={20} />
+                   <span className="text-xs font-black uppercase tracking-widest leading-none">OTP sent to registered mobile</span>
                 </div>
                 <div className="space-y-4">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 text-center block">Enter 6-digit Secure Token</label>

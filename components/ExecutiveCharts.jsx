@@ -2,13 +2,9 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
-interface DataPoint {
-  n: string; v: number; v2?: number; v3?: number; c?: string;
-}
-
 const COLORS = ['#4f46e5', '#6366f1', '#818cf8', '#a5b4fc', '#67e8f9', '#fb923c', '#f87171', '#ec4899', '#d1d5db'];
 
-export const ExecutiveCompositeGauge: React.FC<{ value: number; label: string; color: string }> = ({ value, label, color }) => {
+export const ExecutiveCompositeGauge = ({ value, label, color }) => {
   const safeValue = isNaN(value) ? 0 : value;
   
   const option = {
@@ -61,7 +57,7 @@ export const ExecutiveCompositeGauge: React.FC<{ value: number; label: string; c
   return <div className="w-full h-[280px]"><ReactECharts option={option} style={{ height: '100%', width: '100%' }} /></div>;
 };
 
-export const ExecutiveRadarChart: React.FC<{ data: DataPoint[] }> = ({ data = [] }) => {
+export const ExecutiveRadarChart = ({ data = [] }) => {
   const safeData = Array.isArray(data) ? data : [];
   if (safeData.length === 0) return <div className="flex items-center justify-center h-[400px] text-slate-300 font-black uppercase tracking-widest text-[10px]">Registry Empty</div>;
 
@@ -93,7 +89,7 @@ export const ExecutiveRadarChart: React.FC<{ data: DataPoint[] }> = ({ data = []
   return <div className="w-full h-[500px]"><ReactECharts option={option} style={{ height: '100%', width: '100%' }} /></div>;
 };
 
-export const ExecutiveVerticalBarChart: React.FC<{ data: any[]; title?: string; yAxisName?: string }> = ({ data = [], title = "Metric", yAxisName = "Value" }) => {
+export const ExecutiveVerticalBarChart = ({ data = [], title = "Metric", yAxisName = "Value" }) => {
   const safeData = Array.isArray(data) ? data : [];
   if (safeData.length === 0) return <div className="flex items-center justify-center h-[400px] text-slate-300 font-black uppercase tracking-widest text-[10px]">Registry Empty</div>;
 
@@ -127,7 +123,7 @@ export const ExecutiveVerticalBarChart: React.FC<{ data: any[]; title?: string; 
   return <div className="w-full h-[550px]"><ReactECharts option={option} style={{ height: '100%', width: '100%' }} /></div>;
 };
 
-export const ExecutiveDonutChart: React.FC<{ data: any[] }> = ({ data = [] }) => {
+export const ExecutiveDonutChart = ({ data = [] }) => {
   const safeData = Array.isArray(data) ? data : [];
   if (safeData.length === 0) return <div className="flex items-center justify-center h-[400px] text-slate-300 font-black uppercase tracking-widest text-[10px]">Registry Empty</div>;
 
@@ -150,7 +146,7 @@ export const ExecutiveDonutChart: React.FC<{ data: any[] }> = ({ data = [] }) =>
   return <div className="w-full h-[450px]"><ReactECharts option={option} style={{ height: '100%', width: '100%' }} /></div>;
 };
 
-export const ExecutiveLineChart: React.FC<{ data: any[] }> = ({ data = [] }) => {
+export const ExecutiveLineChart = ({ data = [] }) => {
   const safeData = Array.isArray(data) ? data : [];
   if (safeData.length === 0) return <div className="flex items-center justify-center h-[400px] text-slate-300 font-black uppercase tracking-widest text-[10px]">Registry Empty</div>;
 
@@ -184,7 +180,7 @@ export const ExecutiveLineChart: React.FC<{ data: any[] }> = ({ data = [] }) => 
   return <div className="w-full h-[500px]"><ReactECharts option={option} style={{ height: '100%', width: '100%' }} /></div>;
 };
 
-export const ExecutiveStackedBarChart: React.FC<{ data: any[] }> = ({ data = [] }) => {
+export const ExecutiveStackedBarChart = ({ data = [] }) => {
   const safeData = Array.isArray(data) ? data : [];
   if (safeData.length === 0) return <div className="flex items-center justify-center h-[500px] text-slate-300 font-black uppercase tracking-widest text-[10px]">Registry Empty</div>;
 

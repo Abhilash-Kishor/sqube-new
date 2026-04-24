@@ -14,12 +14,7 @@ import {
   BarChart3
 } from 'lucide-react';
 
-interface ResultAtGlanceProps {
-  region: string;
-  theme?: 'light' | 'dark';
-}
-
-const ResultAtGlance: React.FC<ResultAtGlanceProps> = ({ theme = 'light' }) => {
+const ResultAtGlance = ({ theme = 'light' }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedState] = useState('GUJARAT');
 

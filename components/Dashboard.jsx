@@ -1,32 +1,23 @@
+
 import React, { useState, useMemo, useEffect } from 'react';
 import { QUICK_FACTS_KPIS, MOCK_REGIONAL_DATA, COMPOSITE_INDICATORS } from '../constants';
 import { 
-  TrendingUp, TrendingDown, BrainCircuit, Sparkles, BarChart3, Info, X, 
-  ChevronRight, Target, Trophy, Percent, Activity, Table as TableIcon,
-  Download, FileText, Layout, RefreshCw, Zap, Users, FileQuestion
+  TrendingUp, TrendingDown, BrainCircuit, Sparkles, Info, X, 
+  Download, FileText, RefreshCw, Zap, Users, FileQuestion
 } from 'lucide-react';
 import { getAIInsight } from '../services/geminiService';
-import { dashboardData } from '../mockData';
 import * as Charts from './ExecutiveCharts';
-import { Language } from '../types';
 
-interface DashboardProps {
-  language?: Language;
-  activeSubTab?: string;
-  region?: string;
-  schoolType?: string;
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ 
+const Dashboard = ({ 
   language = 'en', 
   activeSubTab = 'national',
   region = 'All India',
   schoolType = 'Independent'
 }) => {
-  const [aiInsight, setAiInsight] = useState<string | null>(null);
+  const [aiInsight, setAiInsight] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [selectedKpi, setSelectedKpi] = useState<typeof QUICK_FACTS_KPIS[0] | null>(null);
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+  const [selectedKpi, setSelectedKpi] = useState(null);
+  const [viewMode, setViewMode] = useState('chart');
 
   const currentStats = useMemo(() => MOCK_REGIONAL_DATA[region] || MOCK_REGIONAL_DATA['All India'], [region]);
   
@@ -37,7 +28,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     const insight = await getAIInsight(
       activeSubTab === 'regional' ? 'Regional Comparison' : 'National Overview', 
       summary, 
-      language as Language
+      language
     );
     
     setAiInsight(insight);
@@ -48,7 +39,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     handleGenerateInsight();
   }, [handleGenerateInsight]);
 
-  const kpiValue = (kpiKey: string) => {
+  const kpiValue = (kpiKey) => {
     switch(kpiKey) {
       case 'schools': return currentStats.schools.toLocaleString();
       case 'ptr': return `${currentStats.ptr}:1`;
@@ -170,7 +161,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                <div key={ci.key} className="bg-white dark:bg-slate-900 p-6 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl flex flex-col items-center text-center group hover:-translate-y-2 transition-transform cursor-pointer">
                   <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-[#002B5B] dark:text-blue-400 mb-2 group-hover:bg-[#002B5B] dark:group-hover:bg-blue-600 group-hover:text-white transition-colors">{ci.icon}</div>
                   <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-4">{ci.label}</h4>
-                  <Charts.ExecutiveCompositeGauge value={(currentStats as any)[ci.key] || 0} label={ci.label} color={ci.color} />
+                  <Charts.ExecutiveCompositeGauge value={currentStats[ci.key] || 0} label={ci.label} color={ci.color} />
                   <p className="text-[10px] text-slate-400 font-medium px-4 opacity-0 group-hover:opacity-100 transition-opacity">{ci.description}</p>
                </div>
             ))}
@@ -184,7 +175,7 @@ const Dashboard: React.FC<DashboardProps> = ({
               <div className="p-12 space-y-10">
                  <div className="flex justify-between items-end border-b border-slate-50 dark:border-slate-800 pb-8">
                     <div className="flex items-center gap-6">
-                       <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/30 text-[#002B5B] dark:text-blue-400 rounded-3xl flex items-center justify-center">{React.cloneElement(selectedKpi.icon as React.ReactElement<any>, { size: 40 })}</div>
+                       <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/30 text-[#002B5B] dark:text-blue-400 rounded-3xl flex items-center justify-center">{React.cloneElement(selectedKpi.icon, { size: 40 })}</div>
                        <div>
                           <h2 className="text-4xl font-black text-[#002B5B] dark:text-slate-100 tracking-tight">{selectedKpi.label}</h2>
                           <p className="text-xs font-black text-slate-400 uppercase tracking-widest mt-1">Institutional Success Metric</p>

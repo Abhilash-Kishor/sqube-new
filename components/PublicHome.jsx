@@ -1,20 +1,17 @@
+
 import React from 'react';
 import SpatialEcosystemMap from './SpatialEcosystemMap';
 import { 
-  ArrowRight, ShieldCheck, Globe, Layers, 
+  ArrowRight, ShieldCheck, Globe, 
   School, ChevronRight, Activity, Target, 
-  BookOpen, Award, Users, Landmark,
-  LineChart, Sparkles, Building2, Map, ShieldAlert,
+  Award, Users, Landmark,
+  Building2, ShieldAlert, Sparkles,
   Database, Zap, Cpu, Brain, Cloud, Bot, MousePointer2,
-  Lock, Share2, TrendingUp, SearchCode, FileQuestion, Users2
+  Lock, Share2, SearchCode, FileQuestion, Users2
 } from 'lucide-react';
 
-interface PublicHomeProps {
-  onLoginClick: (institution: 'cbse' | 'nvs' | 'kvs') => void;
-}
-
-const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
-  const scrollToSection = (id: string) => {
+const PublicHome = ({ onLoginClick }) => {
+  const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -55,16 +52,10 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
     }
   ];
 
-  const ecosystemMatrix = [
-    { name: 'CBSE Schools', full: 'Affiliated Private & Govt Network', count: '30,124' },
-    { name: 'KVS', full: 'Kendriya Vidyalaya Network', count: '1,254' },
-    { name: 'NVS', full: 'Navodaya Vidyalaya Samiti', count: '661' },
-  ];
-
   const loginTypes = [
-    { id: 'cbse' as const, name: 'CBSE', desc: 'Sovereign Institutional Hub', icon: <School size={40} className="text-[#003366] group-hover:text-white transition-colors" /> },
-    { id: 'nvs' as const, name: 'NVS', desc: 'Navodaya Vidyalaya Hub', icon: <Landmark size={40} className="text-[#FF9933] group-hover:text-white transition-colors" /> },
-    { id: 'kvs' as const, name: 'KVS', desc: 'Kendriya Vidyalaya Hub', icon: <Building2 size={40} className="text-[#006633] group-hover:text-white transition-colors" /> },
+    { id: 'cbse', name: 'CBSE', desc: 'Sovereign Institutional Hub', icon: <School size={40} className="text-[#003366] group-hover:text-white transition-colors" /> },
+    { id: 'nvs', name: 'NVS', desc: 'Navodaya Vidyalaya Hub', icon: <Landmark size={40} className="text-[#FF9933] group-hover:text-white transition-colors" /> },
+    { id: 'kvs', name: 'KVS', desc: 'Kendriya Vidyalaya Hub', icon: <Building2 size={40} className="text-[#006633] group-hover:text-white transition-colors" /> },
   ];
 
   const screenshotFeatures = [
@@ -180,7 +171,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
                   {nationalStats.map((stat, i) => (
                     <div key={i} className="flex items-center gap-8 group cursor-pointer">
                        <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center border border-white/20 group-hover:bg-white group-hover:text-[#002B5B] transition-all duration-500 shadow-sm group-hover:shadow-2xl group-hover:-translate-y-1">
-                          {React.cloneElement(stat.icon as React.ReactElement<any>, { size: 36, className: "group-hover:text-[#002B5B] transition-colors" })}
+                          {React.cloneElement(stat.icon, { size: 36, className: "group-hover:text-[#002B5B] transition-colors" })}
                        </div>
                        <div className="space-y-1">
                           <p className="text-4xl font-black text-white tracking-tighter leading-none mb-1">{stat.value}</p>
@@ -262,7 +253,7 @@ const PublicHome: React.FC<PublicHomeProps> = ({ onLoginClick }) => {
                   <div key={i} className="flex flex-col rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-slate-50 group">
                     <div className={`flex-1 min-h-[160px] bg-gradient-to-br ${f.color} flex flex-col items-center justify-center p-8 text-center`}>
                       <div className="text-white/40 group-hover:text-white transition-all duration-500 scale-125 mb-4">
-                        {React.cloneElement(f.icon as React.ReactElement<any>, { size: 64, strokeWidth: 1.2 })}
+                        {React.cloneElement(f.icon, { size: 64, strokeWidth: 1.2 })}
                       </div>
                       <p className="text-[10px] text-white/0 group-hover:text-white/90 font-bold transition-all duration-500 leading-tight uppercase tracking-widest">
                         {f.desc}

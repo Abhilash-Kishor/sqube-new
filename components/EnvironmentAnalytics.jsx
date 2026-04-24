@@ -4,13 +4,7 @@ import { Trees, Zap, Activity, Target, LayoutGrid } from 'lucide-react';
 import ProximityAnalysis from './ProximityAnalysis';
 import { MODULE_DEFINITIONS } from '../constants';
 
-interface EnvironmentAnalyticsProps {
-  activeSubTab: string;
-  setActiveSubTab: (id: string) => void;
-  theme?: string;
-}
-
-const EnvironmentAnalytics: React.FC<EnvironmentAnalyticsProps> = ({ 
+const EnvironmentAnalytics = ({ 
   activeSubTab, 
   setActiveSubTab,
   theme = 'light'

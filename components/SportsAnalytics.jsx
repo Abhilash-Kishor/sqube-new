@@ -1,36 +1,29 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
-  Trophy, School, Building2, MapPin, Award, 
-  FileText, LayoutGrid, Target, ChevronRight, Gamepad2
+  Trophy, FileText, LayoutGrid
 } from 'lucide-react';
 import * as Charts from './ExecutiveCharts';
 import { dashboardData } from '../mockData';
 import { MODULE_DEFINITIONS } from '../constants';
 
-interface SportsAnalyticsProps {
-  activeSubTab: string;
-  setActiveSubTab?: (id: string) => void;
-  region?: string;
-}
-
-const SportsAnalytics: React.FC<SportsAnalyticsProps> = ({ 
+const SportsAnalytics = ({ 
   activeSubTab, 
   setActiveSubTab, 
   region = 'All India' 
 }) => {
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+  const [viewMode, setViewMode] = useState('chart');
   
   const currentModule = MODULE_DEFINITIONS.find(m => m.id === 'sports');
   const subTabs = currentModule?.subTabs || [];
 
   const currentData = useMemo(() => {
     if (!dashboardData || !dashboardData.regions) return dashboardData?.default || {};
-    const regionData = (dashboardData.regions as any)[region] || dashboardData.default;
+    const regionData = dashboardData.regions[region] || dashboardData.default;
     return regionData;
   }, [region]);
 
-  const renderAuditControls = (label: string) => (
+  const renderAuditControls = (label) => (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-100 pb-6 gap-4 mb-8">
        <div className="space-y-1">
           <p className="text-[10px] font-black text-orange-500 uppercase tracking-widest">Leadership Participation Audit</p>

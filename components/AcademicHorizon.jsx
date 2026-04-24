@@ -5,24 +5,19 @@ import {
   Trophy, 
   BookOpen, 
   Microscope, 
-  UserSquare2, 
   Award, 
   TrendingUp, 
   Lightbulb, 
   ChevronRight,
   Calculator,
-  Languages,
-  ArrowLeft,
-  Search,
-  School,
-  FileText
+  ArrowLeft
 } from 'lucide-react';
 import * as Charts from './ExecutiveCharts';
 import { academicChallengeData } from '../mockData';
 
-const AcademicHorizon: React.FC = () => {
-  const [selectedChallenge, setSelectedChallenge] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart');
+const AcademicHorizon = () => {
+  const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const [viewMode, setViewMode] = useState('chart');
   const [isSyncing, setIsSyncing] = useState(true);
 
   // Simulate registry handshake on component mount to avoid empty state flash
@@ -99,12 +94,12 @@ const AcademicHorizon: React.FC = () => {
                </div>
                
                <div className="bg-gradient-to-br from-[#0066CC] to-[#002B5B] p-10 rounded-[3rem] text-white shadow-2xl space-y-8 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-10 opacity-10 rotate-6"><Award size={140} /></div>
+                  <div className="absolute top-0 right-0 p-10 opacity-10 rotate-6"></div>
                   <h4 className="text-xs font-black uppercase tracking-[0.3em] flex items-center gap-2">
                      <Trophy size={14} className="text-blue-300" /> TOP PERFORMING SCHOOLS
                   </h4>
                   <div className="space-y-6">
-                     {data.winners.map((winner: any, i: number) => (
+                     {data.winners.map((winner, i) => (
                        <div key={i} className="flex items-center justify-between border-b border-white/10 pb-4">
                           <div className="flex items-center gap-4">
                              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center font-black text-blue-200">#{i+1}</div>
@@ -129,7 +124,7 @@ const AcademicHorizon: React.FC = () => {
                    </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-                   {data.participation.map((row: any, i: number) => (
+                   {data.participation.map((row, i) => (
                      <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
                         <td className="px-10 py-5 font-black text-[#002B5B] dark:text-slate-300 uppercase text-xs">{row.n}</td>
                         <td className="px-10 py-5 font-black text-2xl text-blue-600 text-center">{row.v.toLocaleString()}</td>
@@ -182,8 +177,8 @@ const AcademicHorizon: React.FC = () => {
                 className="group w-full flex items-center justify-between gap-4 px-8 py-6 text-left border-b border-slate-50 dark:border-slate-800 hover:bg-purple-50 dark:hover:bg-slate-800 transition-all rounded-2xl mb-1"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-2 h-10 bg-purple-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <span className="text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest group-hover:text-purple-700 dark:group-hover:text-purple-400 leading-tight">{item}</span>
+                   <div className="w-2 h-10 bg-purple-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                   <span className="text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest group-hover:text-purple-700 dark:group-hover:text-purple-400 leading-tight">{item}</span>
                 </div>
                 <ChevronRight size={18} className="text-slate-300 group-hover:text-purple-700 group-hover:translate-x-1 transition-all" />
               </button>
